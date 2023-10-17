@@ -19,3 +19,59 @@ def normalize(data: list[float]) -> list[float]:
     new_data = [(x-min_data)/(max_min_diff) for x in data]
 
     return new_data
+
+
+def chi_sq(measured_data:list[float], expected_data:list[float], 
+           uncertainty:list[float]):
+    """
+    Parameters
+    ----------
+    measured_data : list[float]
+        List of measured data.
+    expected_data : list[float]
+        List of expected data.
+    uncertainty : list[float]
+        List of uncertainties.
+
+    Returns
+    -------
+    chi_sq : float
+        Chi Squared value.
+
+    """
+    chi_sq = 0
+    # Converting summation in equation into a for loop
+    for i in range(0, len(measured_data)):
+        chi_sq += ((measured_data[i] - expected_data[i])/uncertainty[i])**2
+    
+    chi_sq = (1/(len(measured_data) - 2))*chi_sq
+
+    return chi_sq
+
+
+def chi_sq_red(measured_data:list[float], expected_data:list[float], 
+           uncertainty:list[float], v: int):
+    """
+    Parameters
+    ----------
+    measured_data : list[float]
+        List of measured data.
+    expected_data : list[float]
+        List of expected data.
+    uncertainty : list[float]
+        List of uncertainties.
+
+    Returns
+    -------
+    chi_sq : float
+        Chi Squared value.
+
+    """
+    chi_sq = 0
+    # Converting summation in equation into a for loop
+    for i in range(0, len(measured_data)):
+        chi_sq += ((measured_data[i] - expected_data[i])/uncertainty[i])**2
+    
+    chi_sq = (1/v)*chi_sq
+
+    return chi_sq
